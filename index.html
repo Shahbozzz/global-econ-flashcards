@@ -367,7 +367,6 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
         <article class="face back" id="back" aria-live="polite">
           <div class="verdict-row"><div class="verdict" id="b-verdict"></div><div id="b-meme"></div></div>
           <div id="b-answers" style="display:grid;gap:10px"></div>
-          <p class="explain" id="b-explain"></p>
           <div class="back-actions">
             <button class="btn ghost" id="b-peek">↺ See question</button>
             <button class="btn primary" id="b-next">Next card →</button>
@@ -658,11 +657,10 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
   function fillBack(it) {
     const ok = it.ok;
     $("b-verdict").className = "verdict " + (ok ? "ok" : "no");
-    $("b-verdict").innerHTML = '<span class="big">' + (ok ? "✓ " : "✗ ") + esc(pick(ok ? RIGHT_LINES : WRONG_LINES)) + '</span><span class="line">' + esc(it.q.lec.code + " · " + it.q.lec.title + " · " + it.q.t) + "</span>";
+    $("b-verdict").innerHTML = '<span class="big">' + (ok ? "✓ " : "✗ ") + esc(pick(ok ? RIGHT_LINES : WRONG_LINES)) + "</span>";
     let html = '<div class="answer-box"><span class="k">Correct answer</span><span class="v">' + esc(it.opts[it.ans]) + "</span></div>";
     if (!ok) html += '<div class="answer-box yours"><span class="k">You picked</span><span class="v">' + esc(it.opts[it.picked]) + "</span></div>";
     $("b-answers").innerHTML = html;
-    $("b-explain").textContent = it.q.e;
     $("b-next").textContent = R.i + 1 >= R.items.length ? "See my results →" : "Next card →";
   }
 
