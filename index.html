@@ -6,7 +6,7 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
-<title>Comparative Disadvantage</title>
+<title>Philosophy Flashcards</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,7 +200,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
 @keyframes up { from { transform: translateY(24px); opacity: .4; } to { transform: none; opacity: 1; } }
 .sheet h2 { font-size: var(--step-3); }
 .sheet .sub { color: var(--muted); }
-.counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.counts { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 12px; }
 .count {
   cursor: pointer; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--surface); padding: 16px 8px; display: grid; gap: 4px; justify-items: center;
   box-shadow: 4px 4px 0 var(--shadow); transition: transform .12s, box-shadow .12s, background .12s;
@@ -333,7 +333,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
   <section id="home" class="wrap">
     <div class="hero">
       <span class="eyebrow">Questions for</span>
-      <h1>Introduction to Global Economics</h1>
+      <h1>History of Philosophy</h1>
     </div>
     <div class="grid" id="grid"></div>
     <div class="toggles home-toggles" role="group" aria-label="Settings">
@@ -414,7 +414,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
   // ---------- question index ----------
   const ALL = [];
   LECS.forEach((L) => L.qs.forEach((q, i) => { q.id = L.id + "-" + i; q.lec = L; ALL.push(q); }));
-  const BOSS = { id: 0, code: "ALL", title: "Final Boss", sub: "Every lecture mixed into one deck. This is the closest thing to the real exam.", quip: "", qs: ALL };
+  const BOSS = { id: 0, code: "ALL", title: "Final Boss", sub: "Every theme mixed into one deck. This is the closest thing to the real exam.", quip: "", qs: ALL };
   const lecById = (id) => (id === 0 ? BOSS : LECS.find((L) => L.id === id));
 
   // ---------- storage (per-browser only) ----------
@@ -435,7 +435,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
       M("bruh", "Bruh.", "Bruh."),
       M("bruh-mike", "BRUH", "Bruh moment."),
       M("surprised-pikachu", "Surprised? The slide literally said it.", "Surprised? The slide literally said it."),
-      M("math-lady-confused", "Me calculating Pc over Pt at 3am", "Calculating. Calculating. Wrong."),
+      M("math-lady-confused", "Me explaining apeiron at 3am", "Calculating. Calculating. Wrong."),
       M("michael-scott-no-god-no", "No. God. Please. No.", "No! God! Please no!"),
       M("facepalm", "The professor grading that answer", "Facepalm."),
       M("travolta-confused", "Looking for the right answer like…", "Where did the right answer go?"),
@@ -462,22 +462,22 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
     ],
     right: [
       M("success-kid", "Small win. Big energy.", "Small win. Big energy."),
-      M("leonardo-dicaprio-cheers", "Cheers to you, economist", "Cheers to you."),
+      M("leonardo-dicaprio-cheers", "Cheers to you, philosopher", "Cheers to you."),
       M("stonks", "STONKS", "Stonks!"),
       M("sheesh", "SHEEEESH", "Sheeeesh!"),
-      M("roll-safe", "Can't fail the exam if you know the slides", "Can't fail if you know the slides."),
+      M("roll-safe", "Can't fail the exam if you know the cheat sheet", "Can't fail if you know the cheat sheet."),
       M("big-brain", "Galaxy brain unlocked", "Galaxy brain."),
       M("nailed-it", "Nailed it.", "Nailed it."),
-      M("cat-vibing", "Vibing with comparative advantage", "Vibing."),
+      M("cat-vibing", "Vibing with the Dao", "Vibing."),
       M("let-him-cook", "Let them cook", "Let them cook!"),
       M("mind-blown", "Mind = blown", "Mind blown."),
       M("spongebob-imagination", "Imagine failing. Couldn't be you.", "Imagine failing. Couldn't be you.")
     ],
     streak: [
-      M("gigachad", "Gigachad of global economics", "Gigachad of global economics."),
+      M("gigachad", "Gigachad of philosophy", "Gigachad of philosophy."),
       M("obama-medal", "Awarding yourself a medal (deserved)", "Give yourself a medal."),
       M("wolf-of-wall-street", "LET'S GOOOO", "Let's goooo!"),
-      M("money-rain", "Gains from trade: confirmed", "Gains from trade, confirmed!")
+      M("money-rain", "Love of wisdom: confirmed", "Love of wisdom, confirmed!")
     ]
   };
   const queues = {};
@@ -486,13 +486,13 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
 
   // ---------- copy ----------
   const TICKER = [
-    ["STONKS", "▲ 420%", "up"], ["YOUR GPA", "▼ 3.1%", "down"], ["FINAL EXAM WEIGHT", "40% · NO PRESSURE", ""],
-    ["OPPORTUNITY COST OF DOOMSCROLLING", "THIS EXAM", "down"], ["GAINS FROM TRADE", "▲ MUTUAL", "up"], ["ATTENDANCE", "10% OF YOUR GRADE", ""],
-    ["TARIFF ON SLEEP", "100%", "down"], ["COMPARATIVE ADVANTAGE IN PROCRASTINATION", "CONFIRMED", ""], ["BILL GATES COOKING", "▼ $468K/HR", "down"],
-    ["GRAVITY MODEL", "TRADE MORE WITH YOUR NOTES", "up"], ["PROFESSOR TRAPS", "LOADED", "down"], ["SINGAPORE TRADE/GDP", "▲ 456%", "up"]
+    ["LOVE OF WISDOM", "▲ PHILEO + SOPHIA", "up"], ["YOUR SLEEP", "▼ NON-BEING", "down"], ["PARMENIDES", "BEING IS MOTIONLESS (LIKE YOU)", ""],
+    ["HERACLITUS", "EVERYTHING FLOWS ▲", "up"], ["THALES", "IT'S ALL WATER", ""], ["YOUR GPA", "▼ APEIRON-LEVEL CHAOS", "down"],
+    ["SOCRATES", "LACK OF KNOWLEDGE = IGNORANCE", "down"], ["NAQSHBAND", "HEART WITH GOD, HANDS AT WORK", "up"], ["ULUGBEK", "1118 STARS ▲", "up"],
+    ["DESCARTES", "THINKING + EXTENDED", ""], ["BRUNO", "STARS ARE SUNS ▲", "up"], ["EXAM", "LOADING…", "down"]
   ];
   const RIGHT_LINES = ["Correct. Respect.", "W answer.", "Locked in.", "Ate. No crumbs.", "That's the one.", "Slay, economically.", "Big brain move."];
-  const WRONG_LINES = ["Wrong. It's okay, we move.", "L answer. Read the why.", "Not quite, bestie.", "Big oof.", "The slides said otherwise.", "Professor 1, you 0."];
+  const WRONG_LINES = ["Wrong. It's okay, we move.", "L answer. Read the why.", "Not quite, bestie.", "Big oof.", "The cheat sheet said otherwise.", "Professor 1, you 0."];
 
   // ---------- audio ----------
   let AC = null;
@@ -539,7 +539,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
     const card = (L) => {
       const st = S.lec[L.id] || {};
       const best = st.best == null ? "" : '<span class="best">best <b>' + st.best + "%</b></span>";
-      if (L.id === 0) return '<button class="lec boss" data-id="0"><div class="lec-top" style="justify-content:flex-start"><span class="code">ALL 6</span>' + best + '</div><h3>Final Boss</h3><span class="boss-cta">All lectures mixed</span></button>';
+      if (L.id === 0) return '<button class="lec boss" data-id="0"><div class="lec-top" style="justify-content:flex-start"><span class="code">ALL 7</span>' + best + '</div><h3>Final Boss</h3><span class="boss-cta">All lectures mixed</span></button>';
       return '<button class="lec" data-id="' + L.id + '"><div class="lec-top"><span class="code">' + L.code + "</span>" + best + "</div><h3>" + esc(L.title) + "</h3></button>";
     };
     g.innerHTML = LECS.map(card).join("") + card(BOSS);
@@ -557,14 +557,15 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
   // ---------- setup sheet ----------
   let setupId = null;
   const COUNT_LABELS = { 20: "Quick warm-up", 40: "Serious grind", 60: "Exam simulator" };
+  const countsFor = (pool) => [20, 40, 60].filter((n) => n < pool).concat(pool);
   function openSetup(id) {
     ctx();
     setupId = id;
     const L = lecById(id);
-    $("s-code").textContent = id === 0 ? "ALL LECTURES" : L.code + " · LECTURE " + L.id;
+    $("s-code").textContent = id === 0 ? "ALL THEMES" : L.code + " · THEME " + L.id;
     $("s-title").textContent = L.title;
     $("s-sub").textContent = L.sub;
-    $("s-counts").innerHTML = [20, 40, 60].map((n) => '<button class="count" data-n="' + n + '"><b>' + n + "</b><span>" + COUNT_LABELS[n] + "</span></button>").join("");
+    $("s-counts").innerHTML = countsFor(L.qs.length).map((n) => '<button class="count" data-n="' + n + '"><b>' + n + "</b><span>" + (COUNT_LABELS[n] || "Every card") + "</span></button>").join("");
     $("s-counts").querySelectorAll(".count").forEach((b) => b.addEventListener("click", () => startRound(id, +b.dataset.n, false)));
     const missed = missedFor(id);
     const mb = $("s-mistakes");
@@ -700,7 +701,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
     { min: 90, grade: "Professor-proof", meme: "obama-medal", line: "You'd survive even the meanest exam. Go touch grass, you earned it.", say: "Professor proof. Absolute legend." },
     { min: 75, grade: "Exam ready-ish", meme: "gigachad", line: "Solid. A few gaps left. Patch them and you're cooking.", say: "Exam ready. Almost him." },
     { min: 50, grade: "Mid. Respectfully.", meme: "kombucha-girl", line: "You know the vibes, not the details. The professor grades the details.", say: "Mid. Respectfully." },
-    { min: 30, grade: "It's giving retake", meme: "this-is-fine", line: "Not great, not hopeless. Read the slides for your weakest topics, then run it back.", say: "It's giving retake." },
+    { min: 30, grade: "It's giving retake", meme: "this-is-fine", line: "Not great, not hopeless. Read the cheat sheet for your weakest topics, then run it back.", say: "It's giving retake." },
     { min: 0, grade: "Down bad", meme: "coffin-dance", line: "Rough round. Good news: now you know exactly what to study.", say: "Down bad. But we can fix this." }
   ];
   function finish() {
@@ -725,7 +726,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
 
     const advice = [];
     const weak = rows.filter((r) => r.a < 0.8).slice(0, 3);
-    if (weak.length) advice.push("Re-read the slides on <b>" + weak.map((w) => esc(w.k) + " (" + w.c + "/" + w.n + ")").join("</b>, <b>") + "</b>. That's where you're losing points.");
+    if (weak.length) advice.push("Re-read the cheat sheet on <b>" + weak.map((w) => esc(w.k) + " (" + w.c + "/" + w.n + ")").join("</b>, <b>") + "</b>. That's where you're losing points.");
     else advice.push("No weak topic this round. Try the 60-card run or the Final Boss to stress-test it.");
     if (traps.length) {
       if (trapAcc + 15 < normAcc) advice.push("Professor traps got you: " + trapAcc + "% on traps vs " + normAcc + "% on normal cards. Read every word. The trap is usually a swapped number, a swapped country, or 'absolute' vs 'comparative'.");
