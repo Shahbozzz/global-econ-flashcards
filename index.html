@@ -281,6 +281,50 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
 .meme.good figcaption { color: var(--good); }
 @keyframes pop { from { transform: scale(.6) rotate(-8deg); opacity: 0; } to { transform: rotate(2deg); opacity: 1; } }
 
+/* home tabs + learn notes */
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); box-shadow: 3px 3px 0 var(--shadow); justify-self: start; }
+.tab { border: 0; background: transparent; cursor: pointer; font-weight: 800; font-family: var(--font-display); font-size: var(--step-0); padding: 8px 18px; border-radius: 999px; min-height: 40px; }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.learn-card { text-align: left; cursor: pointer; display: grid; gap: 8px; align-content: start; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 16px 18px; box-shadow: 5px 5px 0 var(--shadow); transition: transform .14s ease, box-shadow .14s ease; min-width: 0; }
+.learn-card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--shadow); }
+.learn-card h3 { font-size: var(--step-1); font-weight: 800; }
+.learn-card .sub { color: var(--muted); font-size: var(--step--1); }
+.learn-card.review { grid-column: 1 / -1; background: var(--sticker); color: var(--sticker-ink); }
+.learn-card.review .sub { color: var(--sticker-ink); opacity: .8; }
+.learn-card.review .code { background: var(--sticker-ink); color: var(--sticker); }
+.learn { padding-block: 18px 72px; display: grid; gap: 16px; max-width: 860px; margin: 0 auto; }
+.learn-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.learn-head { display: grid; gap: 6px; }
+.learn-head h2 { font-size: var(--step-3); font-weight: 800; }
+.learn-head p { color: var(--muted); }
+.jump { display: flex; gap: 8px; flex-wrap: wrap; }
+.jump a { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--ink); border: 2px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+.jump a:hover { border-color: var(--ink); }
+.learn-search { width: 100%; min-height: 46px; border: 2px solid var(--ink); border-radius: 12px; padding: 0 14px; font: inherit; background: var(--surface); color: var(--ink); }
+.lsec { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 18px; display: grid; gap: 12px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 48px); min-width: 0; }
+.lsec h3 { font-size: var(--step-1); font-weight: 800; }
+.lsec.must { border-color: var(--bad); background: var(--bad-soft); }
+.lsec.must h3 { color: var(--bad); }
+.lsec.warn { border-color: var(--warn); background: var(--warn-soft); }
+.lsec ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.lsec li { line-height: 1.55; }
+.lsec ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.lrow { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px 16px; padding-block: 10px; border-top: 1px solid var(--line); }
+.lrow:first-of-type { border-top: 0; padding-top: 0; }
+.lrow b { font-weight: 700; }
+.lrow span { line-height: 1.55; }
+@media (min-width: 700px) { .lrow { grid-template-columns: minmax(150px, 32%) minmax(0, 1fr); } }
+.lperson { display: grid; gap: 4px; padding-block: 12px; border-top: 1px solid var(--line); }
+.lperson:first-of-type { border-top: 0; padding-top: 0; }
+.lperson b { font-family: var(--font-display); font-size: var(--step-1); }
+.lperson .facts { font-size: var(--step--1); color: var(--muted); }
+.lqa { border-top: 1px solid var(--line); padding-block: 10px; }
+.lqa:first-of-type { border-top: 0; padding-top: 0; }
+.lqa summary { cursor: pointer; font-weight: 700; }
+.lqa p { padding-top: 6px; color: var(--good); font-weight: 600; }
+.learn-foot { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; }
+mark { background: var(--sticker); color: var(--sticker-ink); border-radius: 3px; }
+
 /* results */
 .results { padding-block: 26px 72px; display: grid; gap: 18px; }
 .res-hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px; align-items: stretch; }
@@ -334,13 +378,23 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
     <div class="hero">
       <span class="eyebrow">Questions for</span>
       <h1>History of Philosophy</h1>
+      <div class="tabs" role="tablist" aria-label="Mode">
+        <button class="tab" role="tab" id="tab-test" aria-selected="true">Test</button>
+        <button class="tab" role="tab" id="tab-learn" aria-selected="false">Learn</button>
+      </div>
     </div>
     <div class="grid" id="grid"></div>
+    <div class="grid" id="learn-grid" hidden></div>
     <div class="toggles home-toggles" role="group" aria-label="Settings">
       <button class="toggle" id="t-memes" aria-pressed="true"><span class="dot"></span>Memes</button>
       <button class="toggle" id="t-sfx" aria-pressed="true"><span class="dot"></span>Sound</button>
     </div>
     <footer class="made-by">Made by Shohboz by Love and Claude</footer>
+  </section>
+
+  <!-- LEARN -->
+  <section id="learn" class="wrap" hidden>
+    <div class="learn" id="learn-body"></div>
   </section>
 
   <!-- QUIZ -->
@@ -401,6 +455,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
 
 
 <script src="questions.js"></script>
+<script src="learn.js"></script>
 <script>
 (function () {
   "use strict";
@@ -525,7 +580,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
 
   // ---------- views ----------
   function show(view) {
-    ["home", "quiz", "results"].forEach((v) => { $(v).hidden = v !== view; });
+    ["home", "learn", "quiz", "results"].forEach((v) => { $(v).hidden = v !== view; });
     window.scrollTo(0, 0);
   }
 
@@ -797,12 +852,84 @@ footer { color: var(--muted); font-size: var(--step--1); padding-block: 0 48px; 
     else if ((k === "Enter" || k === " ") && $("flip").classList.contains("flipped")) { e.preventDefault(); next(); }
   });
 
-  function renderHome() { renderGrid(); renderToggles(); }
+  // ---------- learn mode (cheat sheet notes) ----------
+  const NOTES = window.LEARN || [];
+  let mode = "test";
+  try { mode = localStorage.getItem(KEY + "-mode") || "test"; } catch (e) {}
+  function setMode(m) {
+    mode = m;
+    try { localStorage.setItem(KEY + "-mode", m); } catch (e) {}
+    $("tab-test").setAttribute("aria-selected", String(m === "test"));
+    $("tab-learn").setAttribute("aria-selected", String(m === "learn"));
+    $("grid").hidden = m !== "test";
+    $("learn-grid").hidden = m !== "learn";
+  }
+  $("tab-test").addEventListener("click", () => setMode("test"));
+  $("tab-learn").addEventListener("click", () => setMode("learn"));
+
+  function renderLearnGrid() {
+    $("learn-grid").innerHTML = NOTES.map((N) => '<button class="learn-card' + (N.id === 8 ? " review" : "") + '" data-id="' + N.id + '"><div class="lec-top" style="justify-content:flex-start"><span class="code">' + esc(N.code) + "</span></div><h3>" + esc(N.title) + '</h3><p class="sub">' + esc(N.sub) + "</p></button>").join("");
+    $("learn-grid").querySelectorAll(".learn-card").forEach((b) => b.addEventListener("click", () => openLearn(+b.dataset.id)));
+  }
+
+  function openLearn(id) {
+    const i = NOTES.findIndex((N) => N.id === id);
+    const N = NOTES[i];
+    if (!N) return;
+    const sec = (key, title, inner, cls) => '<section class="lsec ' + (cls || "") + '" id="ls-' + key + '"><h3>' + esc(title) + "</h3>" + inner + "</section>";
+    const rows = (list) => list.map((r) => '<div class="lrow" data-row><b>' + esc(r[0]) + "</b><span>" + esc(r[1]) + "</span></div>").join("");
+    const parts = [], jumps = [];
+    const add = (key, label, title, inner, cls) => { parts.push(sec(key, title, inner, cls)); jumps.push('<a href="#ls-' + key + '" data-jump="ls-' + key + '">' + esc(label) + "</a>"); };
+    if (N.sure) add("sure", "★★★ Must-know", "★★★ Sure exam points — memorize these first", "<ul>" + N.sure.map((t) => "<li data-row>" + esc(t) + "</li>").join("") + "</ul>", "must");
+    if (N.terms) add("terms", "Key terms", "Key terms", rows(N.terms));
+    (N.lists || []).forEach((L, k) => add("list" + k, L.title.split(" — ")[0], L.title, "<ol>" + L.items.map((t) => "<li data-row>" + esc(t) + "</li>").join("") + "</ol>"));
+    if (N.people) add("people", "Key people", "Key people", N.people.map((p) => '<div class="lperson" data-row><b>' + esc(p[0]) + "</b><span>" + esc(p[1]) + '</span><span class="facts">' + esc(p[2]) + "</span></div>").join(""));
+    (N.tables || []).forEach((T, k) => add("table" + k, T.title.split(" — ")[0], T.title, rows(T.rows)));
+    if (N.notes) add("notes", "Note", "Note", N.notes.map((t) => "<p data-row>" + esc(t) + "</p>").join(""));
+    if (N.qa) add("qa", "Practice Q&A", "Practice questions (tap to see the answer)", N.qa.map((q, k) => '<details class="lqa" data-row><summary>' + (k + 1) + ". " + esc(q[0]) + "</summary><p>→ " + esc(q[1]) + "</p></details>").join(""));
+    if (N.warn) add("warn", "⚠ Watch out", "⚠ Watch out", N.warn.map((t) => "<p data-row>" + esc(t) + "</p>").join(""), "warn");
+    const prev = NOTES[i - 1], next = NOTES[i + 1];
+    $("learn-body").innerHTML =
+      '<div class="learn-top"><button class="btn ghost" id="l-back">← All themes</button><span class="code">' + esc(N.code) + "</span></div>" +
+      '<div class="learn-head"><h2>' + esc(N.title) + "</h2><p>" + esc(N.sub) + "</p></div>" +
+      '<nav class="jump" aria-label="Sections">' + jumps.join("") + "</nav>" +
+      '<input class="learn-search" id="l-search" type="search" placeholder="Search in this theme… (e.g. Farabi, 1606, dhikr)">' +
+      parts.join("") +
+      '<div class="learn-foot">' +
+        (prev ? '<button class="btn ghost" id="l-prev">← ' + esc(prev.code) + "</button>" : "<span></span>") +
+        '<button class="btn primary" id="l-test">' + (N.id === 8 ? "Test me on everything →" : "Test me on " + esc(N.code) + " →") + "</button>" +
+        (next ? '<button class="btn ghost" id="l-next">' + esc(next.code) + " →</button>" : "<span></span>") +
+      "</div>";
+    $("l-back").onclick = () => { setMode("learn"); show("home"); };
+    $("l-test").onclick = () => { show("home"); openSetup(N.id === 8 ? 0 : N.id); };
+    if (prev) $("l-prev").onclick = () => openLearn(prev.id);
+    if (next) $("l-next").onclick = () => openLearn(next.id);
+    $("learn-body").querySelectorAll("[data-jump]").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); const t = $(a.dataset.jump); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
+    const search = $("l-search");
+    const originals = new Map();
+    $("learn-body").querySelectorAll("[data-row]").forEach((el) => originals.set(el, el.innerHTML));
+    search.addEventListener("input", () => {
+      const q = search.value.trim().toLowerCase();
+      const re = q ? new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi") : null;
+      originals.forEach((html, el) => {
+        el.innerHTML = html;
+        const hit = !q || el.textContent.toLowerCase().includes(q);
+        el.hidden = !hit;
+        if (q && hit) el.querySelectorAll("b, span, summary, p").forEach((n) => { if (!n.children.length) n.innerHTML = n.innerHTML.replace(re, "<mark>$1</mark>"); });
+        if (q && hit && el.tagName === "DETAILS") el.open = true;
+        if (q && hit && el.tagName === "LI" ) el.innerHTML = el.innerHTML.replace(re, "<mark>$1</mark>");
+      });
+      $("learn-body").querySelectorAll(".lsec").forEach((sc) => { sc.hidden = !!q && !sc.querySelector("[data-row]:not([hidden])"); });
+    });
+    show("learn");
+  }
+
+  function renderHome() { renderGrid(); renderLearnGrid(); renderToggles(); setMode(mode); }
 
   renderTicker();
   renderHome();
   const h = (location.hash || "").replace("#", "").toLowerCase();
-  const m = /^l([1-6])$/.exec(h);
+  const m = /^l([1-7])$/.exec(h);
   if (m) openSetup(+m[1]); else if (h === "boss") openSetup(0);
 })();
 </script>
